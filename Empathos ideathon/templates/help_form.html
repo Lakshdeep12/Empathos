@@ -1,0 +1,251 @@
+{% extends "base.html" %}
+
+{% block title %}Request Help - Empathos{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow">
+            <div class="card-header bg-success text-white">
+                <h4 class="mb-0">
+                    <i class="fas fa-hands-helping"></i> Request Help & Support
+                </h4>
+                <small>Your information is confidential and will be handled with care</small>
+            </div>
+            <div class="card-body p-4">
+                <form method="POST" action="{{ url_for('submit_complaint') }}">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="mb-3">
+                                <label for="title" class="form-label">Request Title *</label>
+                                <input type="text" class="form-control" id="title" name="title" required 
+                                       placeholder="Brief description of your concern">
+                                <div class="form-text">Please provide a clear, concise title for your request</div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="category" class="form-label">Category *</label>
+                                <select class="form-select" id="category" name="category" required>
+                                    <option value="">Select category</option>
+                                    <option value="mental_health">Mental Health</option>
+                                    <option value="stress_anxiety">Stress & Anxiety</option>
+                                    <option value="depression">Depression</option>
+                                    <option value="relationship">Relationship Issues</option>
+                                    <option value="work_school">Work/School Problems</option>
+                                    <option value="financial">Financial Stress</option>
+                                    <option value="abuse">Abuse/Harassment</option>
+                                    <option value="substance_abuse">Substance Abuse</option>
+                                    <option value="grief_loss">Grief & Loss</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Detailed Description *</label>
+                        <textarea class="form-control" id="description" name="description" rows="6" required
+                                  placeholder="Please describe your situation in detail. Be as specific as you feel comfortable with..."></textarea>
+                        <div class="form-text">The more details you provide, the better we can assist you</div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="urgency" class="form-label">Urgency Level</label>
+                                <select class="form-select" id="urgency" name="urgency">
+                                    <option value="low">Low - I can wait for a response</option>
+                                    <option value="medium" selected>Medium - I need help soon</option>
+                                    <option value="high">High - I need immediate attention</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="preferred_contact" class="form-label">Preferred Contact Method</label>
+                                <select class="form-select" id="preferred_contact" name="preferred_contact">
+                                    <option value="platform" selected>Through this platform</option>
+                                    <option value="email">Email (if provided)</option>
+                                    <option value="phone">Phone call</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="anonymous" name="anonymous">
+                        <label class="form-check-label" for="anonymous">
+                            Submit anonymously (your username will not be visible to authorities)
+                        </label>
+                    </div>
+                    
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="emergency_contact" name="emergency_contact">
+                        <label class="form-check-label" for="emergency_contact">
+                            This is an emergency situation requiring immediate attention
+                        </label>
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{{ url_for('dashboard') }}" class="btn btn-secondary me-md-2">
+                            <i class="fas fa-arrow-left"></i> Back to Dashboard
+                        </a>
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-paper-plane"></i> Submit Request
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Help Categories Information -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <h5 class="mb-3">
+                    <i class="fas fa-info-circle"></i> Understanding Our Categories
+                </h5>
+            </div>
+            
+            <div class="col-md-6 mb-3">
+                <div class="card border-primary h-100">
+                    <div class="card-header bg-primary text-white">
+                        <h6 class="mb-0">
+                            <i class="fas fa-brain"></i> Mental Health
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">General mental health concerns, mood disorders, and psychological well-being.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 mb-3">
+                <div class="card border-warning h-100">
+                    <div class="card-header bg-warning text-dark">
+                        <h6 class="mb-0">
+                            <i class="fas fa-exclamation-triangle"></i> Crisis Situations
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Abuse, harassment, substance abuse, and other urgent situations.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 mb-3">
+                <div class="card border-info h-100">
+                    <div class="card-header bg-info text-white">
+                        <h6 class="mb-0">
+                            <i class="fas fa-users"></i> Life Challenges
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Relationship issues, work/school problems, and financial stress.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 mb-3">
+                <div class="card border-success h-100">
+                    <div class="card-header bg-success text-white">
+                        <h6 class="mb-0">
+                            <i class="fas fa-heart"></i> Grief & Loss
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Coping with loss, bereavement, and life transitions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Emergency Information -->
+        <div class="alert alert-danger mt-4">
+            <h6 class="alert-heading">
+                <i class="fas fa-exclamation-triangle"></i> Emergency Information
+            </h6>
+            <p class="mb-2">If you are experiencing a mental health emergency or crisis:</p>
+            <ul class="mb-0">
+                <li><strong>Emergency Services:</strong> Call 911 immediately</li>
+                <li><strong>National Suicide Prevention Lifeline:</strong> 988 (24/7)</li>
+                <li><strong>Crisis Text Line:</strong> Text HOME to 741741</li>
+                <li><strong>Local Crisis Centers:</strong> Contact your nearest mental health facility</li>
+            </ul>
+        </div>
+        
+        <!-- Privacy Notice -->
+        <div class="alert alert-info mt-4">
+            <h6 class="alert-heading">
+                <i class="fas fa-shield-alt"></i> Privacy & Confidentiality
+            </h6>
+            <p class="mb-0">
+                Your privacy is our priority. All submissions are encrypted and only accessible to authorized personnel. 
+                We will never share your personal information without your explicit consent, except in cases where 
+                we are legally required to do so to ensure your safety or the safety of others.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const emergencyCheckbox = document.getElementById('emergency_contact');
+    const urgencySelect = document.getElementById('urgency');
+    
+    // Update urgency when emergency is checked
+    emergencyCheckbox.addEventListener('change', function() {
+        if (this.checked) {
+            urgencySelect.value = 'high';
+            urgencySelect.disabled = true;
+            
+            // Show emergency alert
+            const alert = document.createElement('div');
+            alert.className = 'alert alert-danger alert-dismissible fade show mt-3';
+            alert.innerHTML = `
+                <strong>Emergency Mode Activated</strong><br>
+                Your request has been marked as urgent. If this is a life-threatening emergency, 
+                please call 911 immediately.
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            document.querySelector('.card-body').appendChild(alert);
+        } else {
+            urgencySelect.disabled = false;
+            urgencySelect.value = 'medium';
+            
+            // Remove emergency alert
+            const alerts = document.querySelectorAll('.alert-danger');
+            alerts.forEach(alert => {
+                if (alert.textContent.includes('Emergency Mode')) {
+                    alert.remove();
+                }
+            });
+        }
+    });
+    
+    // Form validation
+    const form = document.querySelector('form');
+    form.addEventListener('submit', function(e) {
+        const title = document.getElementById('title').value.trim();
+        const description = document.getElementById('description').value.trim();
+        const category = document.getElementById('category').value;
+        
+        if (!title || !description || !category) {
+            e.preventDefault();
+            alert('Please fill in all required fields.');
+            return;
+        }
+        
+        if (description.length < 20) {
+            e.preventDefault();
+            alert('Please provide a more detailed description (at least 20 characters).');
+            return;
+        }
+    });
+});
+</script>
+{% endblock %} 
